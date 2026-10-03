@@ -1,103 +1,482 @@
 
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
+  <title>Dirk Matthew | Developer Portfolio</title>
 
+  <!-- Bootstrap 5.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- Animate.css for entrance animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    :root {
+      /* Theme Transition Speed */
+      --theme-transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      
+      /* Dark Theme Tokens (Default) */
+      --bg-main: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-nav: rgba(15, 23, 42, 0.85);
+      --text-primary: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-blue: #38bdf8;
+      --accent-purple: #818cf8;
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --card-hover-shadow: 0 20px 35px -10px rgba(56, 189, 248, 0.25);
+    }
+
+    [data-bs-theme="light"] {
+      /* Light Theme Tokens */
+      --bg-main: #f1f5f9;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-nav: rgba(255, 255, 255, 0.85);
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border-color: rgba(0, 0, 0, 0.08);
+      --accent-blue: #0284c7;
+      --accent-purple: #4f46e5;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      --card-hover-shadow: 0 20px 30px -5px rgba(2, 132, 199, 0.15);
+    }
+
+    /* Global Apply Transitions */
+    body, .navbar, .custom-card, .custom-list-item, .form-control, .modal-content, footer {
+      transition: var(--theme-transition);
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .custom-navbar {
+      background-color: var(--bg-nav) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar-brand span {
+      color: var(--accent-blue);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Theme Switcher Toggle Pill */
+    .theme-switch-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .theme-switch-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-blue);
+    }
+
+    .custom-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+    }
+
+    .project-card {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .card-img-top {
+      height: 190px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Interactive List Items */
+    .custom-list-item {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px !important;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    [data-bs-theme="light"] .custom-list-item {
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .custom-list-item:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent-blue);
+      transform: translateX(6px);
+    }
+
+    /* Gradient Buttons */
+    .btn-gradient {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #ffffff !important;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-gradient:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+    }
+
+    /* Inputs Styling */
+    .form-control {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 10px;
+    }
+
+    [data-bs-theme="light"] .form-control {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25);
+      color: var(--text-primary);
+    }
+
+    /* Custom Toast Box */
+    .toast-container {
+      z-index: 1080;
+    }
+  </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="#">Dirk <span>Matthew</span></a>
+    
+    <div class="d-flex align-items-center gap-2 order-lg-last ms-2">
+      <!-- Theme Switcher Button -->
+      <button class="theme-switch-btn" id="themeToggleBtn" aria-label="Toggle theme">
+        <i class="bi bi-moon-stars-fill text-warning" id="themeIcon"></i>
+        <span id="themeText" class="d-none d-sm-inline">Dark Mode</span>
+      </button>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Profile</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
-            aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
-        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Contacts</a></li>
+      <ul class="navbar-nav ms-auto fw-medium">
+        <li class="nav-item"><a class="nav-link text-body-emphasis" href="#about">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-body-emphasis" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link text-body-emphasis" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link text-body-emphasis" href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-
-<section id="about" class="py-5">
+<section id="about" class="py-5 my-4 animate__animated animate__fadeIn">
   <div class="container text-center">
-    <h2>About Me</h2>
-    <p class="lead">I’m Dirk Matthew from BSIS01, a tech enthusiast and gamer, building Java Swing applications and learning C#.</p>
+    <div class="mb-3">
+      <span class="badge rounded-pill px-3 py-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle">
+        BSIS01 Student &amp; Developer
+      </span>
+    </div>
+    <h1 class="display-3 fw-bold mb-3">
+      Hi, I'm <span class="gradient-text">Dirk Matthew</span>
+    </h1>
+    <p class="lead mx-auto text-body-secondary fw-normal" style="max-width: 650px;">
+      Tech enthusiast and gamer crafting modern applications with Java Swing, SQL, and expanding expertise into C# and full-stack web software.
+    </p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a href="#projects" class="btn btn-gradient px-4 py-2">
+        <i class="bi bi-folder2-open me-1"></i> View Projects
+      </a>
+      <a href="#contact" class="btn btn-outline-secondary rounded-3 px-4 py-2">
+        <i class="bi bi-envelope me-1"></i> Contact Me
+      </a>
+    </div>
   </div>
 </section>
-
 
 <section id="skills" class="py-5">
-  <div class="container">
-    <h1>MY <span class="badge text-bg-secondary">SKILLS</span></h1>
-    <ul class="list-group">
-      <li class="list-group-item">Java</li>
-      <li class="list-group-item">SQL</li>
-      <li class="list-group-item">Bootstrap</li>
-      <li class="list-group-item">C#</li>
-    </ul>
+  <div class="container" style="max-width: 720px;">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold animate__animated animate__fadeInUp">
+        MY <span class="gradient-text">SKILLS</span>
+      </h2>
+      <p class="text-body-secondary small">Technologies and frameworks I work with</p>
+    </div>
+
+    <div class="custom-card p-3 p-md-4 animate__animated animate__fadeInUp">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center p-3">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-code-slash fs-4 text-info"></i>
+            <div>
+              <div class="fw-semibold">Java</div>
+              <small class="text-body-secondary">Swing GUI &amp; Object-Oriented Logic</small>
+            </div>
+          </div>
+          <span class="badge text-bg-info rounded-pill px-3">Advanced</span>
+        </li>
+
+        <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center p-3">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-database fs-4 text-warning"></i>
+            <div>
+              <div class="fw-semibold">SQL</div>
+              <small class="text-body-secondary">Relational Queries &amp; Database Design</small>
+            </div>
+          </div>
+          <span class="badge text-bg-warning rounded-pill px-3">Intermediate</span>
+        </li>
+
+        <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center p-3">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-bootstrap fs-4 text-primary"></i>
+            <div>
+              <div class="fw-semibold">Bootstrap 5</div>
+              <small class="text-body-secondary">Responsive Layouts &amp; Web UI Design</small>
+            </div>
+          </div>
+          <span class="badge text-bg-primary rounded-pill px-3">Frontend</span>
+        </li>
+
+        <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center p-3">
+          <div class="d-flex align-items-center gap-3">
+            <i class="bi bi-cpu fs-4 text-purple"></i>
+            <div>
+              <div class="fw-semibold">C#</div>
+              <small class="text-body-secondary">.NET Fundamentals &amp; Desktop Apps</small>
+            </div>
+          </div>
+          <span class="badge text-bg-secondary rounded-pill px-3">Learning</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
-
 
 <section id="projects" class="py-5">
   <div class="container">
-    <div class="card" style="width: 18rem;">
-      <img src="images/17336011.png" class="card-img-top" alt="Java Swing GUI Application Preview">
-      <div class="card-body">
-        <h5 class="card-title">Build a GUI</h5>
-        <p class="card-text">Built a GUI during my school year as 1st year.</p>
-        <a href="#" class="btn btn-primary">Go here</a>
-      </div>
+    <div class="text-center mb-5">
+      <h2 class="fw-bold animate__animated animate__fadeInUp">
+        Featured <span class="gradient-text">Projects</span>
+      </h2>
+      <p class="text-body-secondary">Highlights from my academic and personal software development journey</p>
     </div>
-    <div class="card" style="width: 18rem;">
-      <img src="images/pngtree-vibrant-colorful-surprise-gift-box-opening-with-confetti-png-image_19863250.webp" class="card-img-top" alt="First Year College Journey Preview">
-      <div class="card-body">
-        <h5 class="card-title">Survived 1st Year</h5>
-        <p class="card-text">Now doing 2nd year.</p>
-        <a href="#" class="btn btn-primary">Go here</a>
+    
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Project 1 -->
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="card custom-card project-card h-100 animate__animated animate__zoomIn">
+          <img src="images/17336011.png" class="card-img-top" alt="Java Swing GUI Application Preview" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/38bdf8?text=Java+GUI+Project';">
+          <div class="card-body d-flex flex-column justify-content-between p-4">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-info-subtle text-info border border-info-subtle">Java Swing</span>
+                <small class="text-body-secondary">1st Year Project</small>
+              </div>
+              <h5 class="card-title fw-bold">Build a GUI App</h5>
+              <p class="card-text text-body-secondary fs-6">
+                Designed and engineered a complete graphical desktop application built with Java Swing during my 1st year coursework.
+              </p>
+            </div>
+            <button type="button" class="btn btn-gradient w-100 mt-3" onclick="openProjectModal('Build a GUI App', 'Java Swing GUI desktop application featuring form validation, interactive components, and event-driven architecture created during 1st year.')">
+              View Details <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </div>
       </div>
+
+      <!-- Project 2 -->
+      <div class="col-12 col-md-6 col-lg-5">
+        <div class="card custom-card project-card h-100 animate__animated animate__zoomIn" style="animation-delay: 0.15s;">
+          <img src="images/pngtree-vibrant-colorful-surprise-gift-box-opening-with-confetti-png-image_19863250.webp" class="card-img-top" alt="First Year College Journey Preview" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0f172a/818cf8?text=1st+Year+Milestone';">
+          <div class="card-body d-flex flex-column justify-content-between p-4">
+            <div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">Academic Journey</span>
+                <small class="text-body-secondary">2nd Year Progression</small>
+              </div>
+              <h5 class="card-title fw-bold">Survived 1st Year</h5>
+              <p class="card-text text-body-secondary fs-6">
+                Successfully mastered core Information Systems fundamentals, algorithm design, and transitioned smoothly into 2nd year studies.
+              </p>
+            </div>
+            <button type="button" class="btn btn-gradient w-100 mt-3" onclick="openProjectModal('Survived 1st Year', 'Academic milestone covering Information Systems foundation, data modeling, SQL databases, and Object-Oriented Programming excellence.')">
+              View Details <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<section id="contact" class="py-5">
+  <div class="container" style="max-width: 600px;">
+    <div class="custom-card p-4 p-md-5 animate__animated animate__fadeInUp">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Contact <span class="gradient-text">Me</span></h2>
+        <p class="text-body-secondary small">Send a message or reach out for collaboration</p>
+      </div>
+      
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div class="mb-3">
+          <label for="userEmail" class="form-label fw-medium">Email Address</label>
+          <div class="input-group">
+            <span class="input-group-text bg-transparent border-end-0 text-body-secondary"><i class="bi bi-envelope"></i></span>
+            <input type="email" class="form-control border-start-0 ps-0" id="userEmail" placeholder="name@example.com" required>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="userMessage" class="form-label fw-medium">Message</label>
+          <textarea class="form-control" id="userMessage" rows="4" placeholder="Type your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gradient w-100 py-2.5 mt-2">
+          Send Message <i class="bi bi-send-fill ms-1"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
-<section id="contact" class="py-5 bg-light">
+<footer class="py-4 text-center mt-5" style="border-top: 1px solid var(--border-color);">
   <div class="container">
-    <h2 class="text-center">Contact Me</h2>
-    <form>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+    <p class="text-body-secondary mb-2">&copy; 2026 Dirk Matthew. All rights reserved.</p>
+    <div class="d-flex justify-content-center gap-3 fs-5">
+      <a href="https://github.com/dirkmatthewbalofinos-sudo" target="_blank" class="text-body-secondary text-decoration-none hover-blue" title="GitHub Profile">
+        <i class="bi bi-github"></i>
+      </a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" class="text-body-secondary text-decoration-none hover-blue" title="LinkedIn Profile">
+        <i class="bi bi-linkedin"></i>
+      </a>
+    </div>
   </div>
-</section>
-
-
-<footer class="bg-dark text-white text-center py-3">
-  <p>&copy; 2026 Your Name</p>
-  <a href="https://github.com/dirkmatthewbalofinos-sudo" class="text-white me-3">GitHub</a>
-  <a href="https://linkedin.com/in/yourprofile" class="text-white">LinkedIn</a>
 </footer>
 
+<div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content custom-card p-2">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold" id="modalTitle">Project Title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-body-secondary" id="modalBody">
+        Project description goes here...
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary rounded-3 px-4" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Notification Toast -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast align-items-center text-bg-success border-0 rounded-3" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body d-flex align-items-center gap-2">
+        <i class="bi bi-check-circle-fill fs-5"></i>
+        <span>Thank you! Your message has been recorded locally.</span>
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.getElementById('themeText');
+  const htmlElement = document.documentElement;
+
+  // Retrieve saved theme preference or default to dark
+  function initTheme() {
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    setTheme(savedTheme);
+  }
+
+  function setTheme(theme) {
+    htmlElement.setAttribute('data-bs-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+
+    if (theme === 'dark') {
+      themeIcon.className = 'bi bi-moon-stars-fill text-warning';
+      themeText.textContent = 'Dark Mode';
+    } else {
+      themeIcon.className = 'bi bi-sun-fill text-warning';
+      themeText.textContent = 'Light Mode';
+    }
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = htmlElement.getAttribute('data-bs-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+  });
+
+  function openProjectModal(title, description) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalBody').textContent = description;
+    const modal = new bootstrap.Modal(document.getElementById('projectModal'));
+    modal.show();
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    const toastElement = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+    document.getElementById('contactForm').reset();
+  }
+
+  // Load theme preference on initial load
+  document.addEventListener('DOMContentLoaded', initTheme);
+</script>
 </body>
 </html>
