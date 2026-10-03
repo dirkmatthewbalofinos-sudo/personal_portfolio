@@ -1,103 +1,253 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Portfolio</title>
+  <title>Dirk Matthew | Portfolio</title>
 
+  <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- Animate.css for entrance animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --accent-blue: #38bdf8;
+      --accent-purple: #818cf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Custom Glassmorphism Navigation */
+    .custom-navbar {
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-brand span {
+      color: var(--accent-blue);
+    }
+
+    /* Gradient Text Header */
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Glass Cards with Hover Scale */
+    .custom-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
+    }
+
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    /* Interactive Skill Items */
+    .custom-list-item {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px !important;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .custom-list-item:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-blue);
+      transform: translateX(6px);
+      color: #ffffff;
+    }
+
+    /* Glowing Custom Buttons */
+    .btn-gradient {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      color: #fff;
+      border: none;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-gradient:hover {
+      opacity: 0.9;
+      color: #fff;
+      transform: scale(1.02);
+    }
+
+    /* Form Control Focus Style */
+    .form-control {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+    }
+
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+    }
+
+    .form-control::placeholder {
+      color: var(--text-muted);
+    }
+  </style>
 </head>
 <body>
 
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Profile</a>
+<!-- Sticky Animated Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Dirk <span>Matthew</span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
             aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
-        <li class="nav-item"><a class="nav-link disabled" aria-disabled="true">Contacts</a></li>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="#about">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-
-<section id="about" class="py-5">
-  <div class="container text-center">
-    <h2>About Me</h2>
-    <p class="lead">I’m Dirk Matthew from BSIS01, a tech enthusiast and gamer, building Java Swing applications and learning C#.</p>
+<!-- About Section -->
+<section id="about" class="py-5 text-center my-4 animate__animated animate__fadeIn">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-3">Hi, I'm <span class="gradient-text">Dirk Matthew</span></h1>
+    <p class="lead text-secondary mx-auto" style="max-width: 650px;">
+      BSIS01 Student • Tech Enthusiast • Gamer
+    </p>
+    <p class="text-light opacity-75 mx-auto" style="max-width: 600px;">
+      Currently building desktop applications using Java Swing and expanding skills into C# and modern web technologies.
+    </p>
   </div>
 </section>
 
-
+<!-- Skills Section -->
 <section id="skills" class="py-5">
-  <div class="container">
-    <h1>MY <span class="badge text-bg-secondary">SKILLS</span></h1>
-    <ul class="list-group">
-      <li class="list-group-item">Java</li>
-      <li class="list-group-item">SQL</li>
-      <li class="list-group-item">Bootstrap</li>
-      <li class="list-group-item">C#</li>
+  <div class="container" style="max-width: 700px;">
+    <h2 class="text-center fw-bold mb-4 animate__animated animate__fadeInUp">
+      MY <span class="badge btn-gradient shadow-sm">SKILLS</span>
+    </h2>
+    <ul class="list-group list-group-flush shadow-sm p-3 rounded-4 custom-card animate__animated animate__fadeInUp">
+      <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-code-slash text-info me-2"></i> Java</span>
+        <span class="badge text-bg-info">Swing / Core</span>
+      </li>
+      <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-database text-warning me-2"></i> SQL</span>
+        <span class="badge text-bg-warning">Database</span>
+      </li>
+      <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-bootstrap text-primary me-2"></i> Bootstrap</span>
+        <span class="badge text-bg-primary">Frontend</span>
+      </li>
+      <li class="list-group-item custom-list-item d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-cpu text-purple me-2"></i> C#</span>
+        <span class="badge text-bg-secondary">Learning</span>
+      </li>
     </ul>
   </div>
 </section>
 
-
+<!-- Projects Section -->
 <section id="projects" class="py-5">
-  <div class="container">
-    <div class="card" style="width: 18rem;">
-      <img src="images/17336011.png" class="card-img-top" alt="Java Swing GUI Application Preview">
-      <div class="card-body">
-        <h5 class="card-title">Build a GUI</h5>
-        <p class="card-text">Built a GUI during my school year as 1st year.</p>
-        <a href="#" class="btn btn-primary">Go here</a>
+  <div class="container text-center">
+    <h2 class="fw-bold mb-5 animate__animated animate__fadeInUp">Featured <span class="gradient-text">Projects</span></h2>
+    
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      
+      <!-- Project 1 -->
+      <div class="card custom-card text-start animate__animated animate__zoomIn" style="width: 20rem;">
+        <img src="images/17336011.png" class="card-img-top" alt="Java Swing GUI Application Preview">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title fw-bold text-light">Build a GUI</h5>
+            <p class="card-text text-secondary">Built a custom Java Swing application interface during 1st year coursework.</p>
+          </div>
+          <a href="#" class="btn btn-gradient w-100 mt-3">View Project <i class="bi bi-arrow-right"></i></a>
+        </div>
       </div>
-    </div>
-    <div class="card" style="width: 18rem;">
-      <img src="images/pngtree-vibrant-colorful-surprise-gift-box-opening-with-confetti-png-image_19863250.webp" class="card-img-top" alt="First Year College Journey Preview">
-      <div class="card-body">
-        <h5 class="card-title">Survived 1st Year</h5>
-        <p class="card-text">Now doing 2nd year.</p>
-        <a href="#" class="btn btn-primary">Go here</a>
+
+      <!-- Project 2 -->
+      <div class="card custom-card text-start animate__animated animate__zoomIn" style="width: 20rem; animation-delay: 0.2s;">
+        <img src="images/pngtree-vibrant-colorful-surprise-gift-box-opening-with-confetti-png-image_19863250.webp" class="card-img-top" alt="First Year College Journey Preview">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title fw-bold text-light">Survived 1st Year</h5>
+            <p class="card-text text-secondary">Successfully completed first year BSIS coursework and progressed into 2nd year.</p>
+          </div>
+          <a href="#" class="btn btn-gradient w-100 mt-3">View Details <i class="bi bi-arrow-right"></i></a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-
-<section id="contact" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center">Contact Me</h2>
-    <form>
-      <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-      </div>
-      <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+  <div class="container" style="max-width: 600px;">
+    <div class="custom-card p-4 p-md-5 animate__animated animate__fadeInUp">
+      <h2 class="text-center fw-bold mb-4">Contact <span class="gradient-text">Me</span></h2>
+      <form>
+        <div class="mb-3">
+          <label for="userEmail" class="form-label text-light">Email address</label>
+          <input type="email" class="form-control" id="userEmail" placeholder="name@example.com" required>
+        </div>
+        <div class="mb-3">
+          <label for="userMessage" class="form-label text-light">Message</label>
+          <textarea class="form-control" id="userMessage" rows="4" placeholder="Your message here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gradient w-100 py-2 mt-2">Send Message <i class="bi bi-send"></i></button>
+      </form>
+    </div>
   </div>
 </section>
 
-
-<footer class="bg-dark text-white text-center py-3">
-  <p>&copy; 2026 Your Name</p>
-  <a href="https://github.com/dirkmatthewbalofinos-sudo" class="text-white me-3">GitHub</a>
-  <a href="https://linkedin.com/in/yourprofile" class="text-white">LinkedIn</a>
+<!-- Footer -->
+<footer class="py-4 text-center" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">
+  <p class="text-secondary mb-2">&copy; 2026 Dirk Matthew. All rights reserved.</p>
+  <div>
+    <a href="https://github.com/dirkmatthewbalofinos-sudo" class="text-secondary me-3 fs-5" target="_blank"><i class="bi bi-github"></i> GitHub</a>
+    <a href="https://linkedin.com/in/yourprofile" class="text-secondary fs-5" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+  </div>
 </footer>
 
-
+<!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
